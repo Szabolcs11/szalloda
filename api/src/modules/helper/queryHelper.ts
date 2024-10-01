@@ -1,7 +1,7 @@
+import bcrypt from "bcryptjs";
 import { request } from "express";
 import { generateRandomString, getDateTime, getIp } from ".";
 import contprom from "../../modules/mysql";
-import bcrypt from "bcryptjs";
 
 export async function loginUser(username: string, password: string) {
   const [rows] = await contprom.query("SELECT * FROM users WHERE Username=?", [username]);
@@ -87,4 +87,28 @@ export async function createGuest(fullName: string, email: string, birthDate: st
   const res = rows as any;
   if (!res.insertId) return false;
   return res.insertId;
+}
+
+export async function createRoom(roomNumber: number, roomType: number) {
+  const info = {
+    RoomNumber: roomNumber,
+    RoomType: roomType,
+  };
+  //@ts-ignore
+  const [result] = await contprom.query("INSERT INTO rooms SET ? ", [info]);
+  const res = result as any[];
+  //@ts-ignore
+  if (!res.insertId) return false;
+  //@ts-ignore
+  return res.insertId;
+}
+
+export async function deleteRoom(roomId: number) {
+  const [rows] = await contprom.query("SELECT * FROM reservations WHERE RoomId=?", [roomId]);
+  const reservatios = rows as any[];
+  if (reservatios.length == 0) {
+    const [rows] = await contprom.query("DELETE FROM rooms WHERE id=?", [roomId]);
+    return true;
+  }
+  return false;
 }
