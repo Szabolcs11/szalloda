@@ -131,6 +131,16 @@ export async function getRooms() {
   return res;
 }
 
+export async function getRoomById(roomId: number) {
+  const [rows] = await contprom.query(
+    "SELECT rooms.id as RoomId, rooms.RoomNumber, room_type.id as RoomTypeId, room_type.Name, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM rooms INNER JOIN room_type ON rooms.RoomType=room_type.id WHERE rooms.id = ?;",
+    [roomId]
+  );
+  const res = rows as any[];
+  if (res.length == 0) return false;
+  return res[0];
+}
+
 export async function getRoomTypes() {
   const [rows] = await contprom.query("SELECT * FROM room_type");
   const res = rows as any[];
@@ -185,4 +195,19 @@ export async function addReservation(
   const res = rows as any;
   if (!res.insertId) return false;
   return res.insertId;
+}
+
+export async function getReservationById(reservationId: number) {
+  const [rows] = await contprom.query(
+    "SELECT reservations.id as ReservationId, reservations.GuestId, reservations.RoomId, reservations.StartDate, reservations.EndDate, reservations.Price, guests.FullName as GuestName, rooms.RoomNumber, room_type.Name as RoomTypeName, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM reservations INNER JOIN guests ON reservations.GuestId = guests.id INNER JOIN rooms ON reservations.RoomId = rooms.id INNER JOIN room_type ON rooms.RoomType = room_type.id WHERE reservations.id = ?;",
+    [reservationId]
+  );
+  const res = rows as any[];
+  if (res.length == 0) return false;
+  return res[0];
+}
+
+export async function deleteReservation(reservationId: number) {
+  const [rows] = await contprom.query("DELETE FROM reservations WHERE id=?", [reservationId]);
+  return true;
 }
