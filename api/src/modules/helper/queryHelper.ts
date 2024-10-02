@@ -89,6 +89,27 @@ export async function createGuest(fullName: string, email: string, birthDate: st
   return res.insertId;
 }
 
+export async function getGuests() {
+  const [rows] = await contprom.query("SELECT * FROM guests WHERE Deleted=0");
+  const res = rows as any[];
+  await Promise.all(
+    res.map(async (guest) => {
+      const [rows] = await contprom.query(
+        "SELECT reservations.id as ReservationId, reservations.GuestId, reservations.RoomId, reservations.StartDate, reservations.EndDate, reservations.Price, guests.id as GuestId, rooms.RoomNumber, room_type.Name as RoomTypeName, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM reservations INNER JOIN guests ON reservations.GuestId = guests.id INNER JOIN rooms ON reservations.RoomId = rooms.id INNER JOIN room_type ON rooms.RoomType = room_type.id WHERE rooms.id = ?;",
+        [guest.id]
+      );
+      let reservation = [];
+      const results = rows as any[];
+      if (results.length != 0) {
+        reservation = results[0];
+      }
+      //@ts-ignore
+      guest.Reservations = reservation;
+    })
+  );
+  return res;
+}
+
 export async function createRoom(roomNumber: number, roomType: number) {
   const info = {
     RoomNumber: roomNumber,
