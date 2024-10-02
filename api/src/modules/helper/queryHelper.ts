@@ -232,3 +232,10 @@ export async function deleteReservation(reservationId: number) {
   const [rows] = await contprom.query("DELETE FROM reservations WHERE id=?", [reservationId]);
   return true;
 }
+
+export async function getUserBySessionToken(token: string) {
+  const [rows] = await contprom.query("SELECT * FROM sessions WHERE Token=?", [token]);
+  const res = rows as any[];
+  if (res.length == 0) return false;
+  return res[0].UserId;
+}
