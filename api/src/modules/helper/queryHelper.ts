@@ -166,3 +166,23 @@ export async function addRoomType(name: string, numOfBeds: number, description: 
   if (!res.insertId) return false;
   return res.insertId;
 }
+
+export async function addReservation(
+  guestId: number,
+  roomId: number,
+  startDate: string,
+  endDate: string,
+  price: number
+) {
+  let info = {
+    GuestId: guestId,
+    RoomId: roomId,
+    StartDate: startDate,
+    EndDate: endDate,
+    Price: price,
+  };
+  const [rows] = await contprom.query("INSERT INTO reservations SET ?", [info]);
+  const res = rows as any;
+  if (!res.insertId) return false;
+  return res.insertId;
+}

@@ -5,6 +5,7 @@ import authRouter from "./routes/auth/index";
 import dashboardRouter from "./routes/dashboard/index";
 import guestRouter from "./routes/guest/index";
 import roomRouter from "./routes/room/index";
+import reservationRouter from "./routes/reservation/index";
 import roomtypeRouter from "./routes/roomtype/index";
 import errorHandler from "./middleware/errorHandler";
 import corsOptions from "./config/corsOptions";
@@ -25,6 +26,7 @@ app.use("/dashboard", dashboardRouter);
 app.use("/guest", guestRouter);
 app.use("/room", roomRouter);
 app.use("/roomtype", roomtypeRouter);
+app.use("/reservation", reservationRouter);
 
 app.use(errorHandler);
 
