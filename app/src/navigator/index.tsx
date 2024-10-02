@@ -5,12 +5,14 @@ import { ENDPOINTS } from "../constans";
 import { Paths } from "./routes";
 import Login from "../pages/auth/Login";
 import Home from "../pages/home/Home";
+import Loader from "../components/Loader";
 
 export let navigator: any;
 export let loginUser: (user: any) => void;
 
 function Index() {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   navigator = useNavigate();
 
   loginUser = (user) => {
@@ -21,12 +23,18 @@ function Index() {
     const fetchUser = () => {
       axios.post(ENDPOINTS.AUTHENTICATE, {}, { withCredentials: true }).then((res) => {
         if (res.data.success) {
+          console.log(res.data.user);
           setUser(res.data.user);
         }
+        setIsLoading(false);
       });
     };
     fetchUser();
   }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Routes>

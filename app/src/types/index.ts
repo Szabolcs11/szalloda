@@ -6,3 +6,8 @@ export interface User {
   Permission: number;
   CreatedAt: string;
 }
+
+export interface LoginFormData {
+  username: string;
+  password: string;
+}
