@@ -11,3 +11,9 @@ export interface LoginFormData {
   username: string;
   password: string;
 }
+
+export interface Stats {
+  guests: number;
+  rooms: number;
+  reservations: number;
+}
