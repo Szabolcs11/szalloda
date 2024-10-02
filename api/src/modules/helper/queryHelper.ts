@@ -112,3 +112,21 @@ export async function deleteRoom(roomId: number) {
   }
   return false;
 }
+
+export async function updateRoom(roomId: number, roomNumber: number, roomType: number) {
+  const [rows] = await contprom.query("UPDATE rooms SET RoomNumber=?, RoomType=? WHERE id=?", [
+    roomNumber,
+    roomType,
+    roomId,
+  ]);
+  if (!rows) return false;
+  return true;
+}
+
+export async function getRooms() {
+  const [rows] = await contprom.query(
+    "SELECT rooms.id as RoomId, rooms.RoomNumber, room_type.id as RoomTypeId, room_type.Name, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM rooms INNER JOIN room_type ON rooms.RoomType=room_type.id;"
+  );
+  const res = rows as any[];
+  return res;
+}
