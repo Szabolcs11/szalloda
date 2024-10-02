@@ -130,3 +130,39 @@ export async function getRooms() {
   const res = rows as any[];
   return res;
 }
+
+export async function getRoomTypes() {
+  const [rows] = await contprom.query("SELECT * FROM room_type");
+  const res = rows as any[];
+  return res;
+}
+
+export async function deleteRoomType(roomTypeId: number) {
+  const [rows] = await contprom.query("SELECT * FROM rooms WHERE RoomType=?", [roomTypeId]);
+  const rooms = rows as any[];
+  if (rooms.length == 0) {
+    const [rows] = await contprom.query("DELETE FROM room_type WHERE id=?", [roomTypeId]);
+    return true;
+  }
+  return false;
+}
+
+export async function getRoomType(roomTypeId: number) {
+  const [rows] = await contprom.query("SELECT * FROM room_type WHERE id=?", [roomTypeId]);
+  const res = rows as any[];
+  if (res.length == 0) return false;
+  return res[0];
+}
+
+export async function addRoomType(name: string, numOfBeds: number, description: string, dailyPrice: number) {
+  let info = {
+    Name: name,
+    NumberOfBeds: numOfBeds,
+    Description: description,
+    DailyPrice: dailyPrice,
+  };
+  const [rows] = await contprom.query("INSERT INTO room_type SET ?", [info]);
+  const res = rows as any;
+  if (!res.insertId) return false;
+  return res.insertId;
+}
