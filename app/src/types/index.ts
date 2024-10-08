@@ -17,3 +17,17 @@ export interface Stats {
   rooms: number;
   reservations: number;
 }
+
+export interface Room {
+  RoomId: number;
+  Name: string;
+  RoomNumber: number;
+  NumberOfBeds: string;
+  Description: string;
+  DailyPrice: number;
+}
+
+export interface NewRoomFormData {
+  roomNumber: string;
+  roomType: number;
+}

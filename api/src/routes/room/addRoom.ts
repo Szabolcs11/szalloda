@@ -7,7 +7,7 @@ router.post("/", async (req: Request, res: any) => {
   if (!roomNumber || !roomType) return res.status(200).send({ success: false, message: "Fill the fields!" });
   const room = await createRoom(roomNumber, roomType);
   if (!room) return res.status(200).send({ success: false, message: "Unexpected error!" });
-  return res.status(200).send({ success: true, room });
+  return res.status(200).send({ success: true, room, message: "Room created successfully!" });
 });
 
 export default router;
