@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { ENDPOINTS } from "../../constans";
 import Loader from "../../components/Loader";
+import { ENDPOINTS } from "../../constans";
 import { Stats, User } from "../../types";
 
 function Home() {

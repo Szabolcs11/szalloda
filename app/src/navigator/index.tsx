@@ -6,6 +6,9 @@ import { Paths } from "./routes";
 import Login from "../pages/auth/Login";
 import Home from "../pages/home/Home";
 import Loader from "../components/Loader";
+import Rooms from "../pages/rooms/Rooms";
+import NewRoom from "../pages/newroom/NewRoom";
+import SiteLayout from "../components/SiteLayout";
 
 export let navigator: any;
 export let loginUser: (user: any) => void;
@@ -23,7 +26,6 @@ function Index() {
     const fetchUser = () => {
       axios.post(ENDPOINTS.AUTHENTICATE, {}, { withCredentials: true }).then((res) => {
         if (res.data.success) {
-          console.log(res.data.user);
           setUser(res.data.user);
         }
         setIsLoading(false);
@@ -46,10 +48,11 @@ function Index() {
       ) : (
         <>
           <Route path="/auth/*" element={<Navigate to={Paths.Home} />} />
-          <Route path={Paths.Home} element={<Home />} />
-          {/* <Route element={<HomeLayout />}> */}
-          {/* <Route path={Paths.Rooms} element={<Rooms />} /> */}
-          {/* </Route> */}
+          <Route element={<SiteLayout />}>
+            <Route path={Paths.Home} element={<Home />} />
+            <Route path={Paths.Rooms} element={<Rooms />} />
+            <Route path={Paths.NewRoom} element={<NewRoom />} />
+          </Route>
         </>
       )}
       <Route path="*" element={<Navigate to={Paths.Login} />} />

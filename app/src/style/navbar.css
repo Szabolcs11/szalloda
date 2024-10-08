@@ -1,0 +1,17 @@
+.navbarroutes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    height: 60px;
+    padding: 0 64px;
+}
+
+.navbarroutes>div {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}

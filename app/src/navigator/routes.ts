@@ -5,4 +5,5 @@ export let Paths = {
   Home: "/",
   Search: "/search",
   Rooms: "/rooms",
+  NewRoom: "/rooms/new",
 };
