@@ -9,6 +9,7 @@ function Navbar() {
         <div onClick={() => navigator(Paths.Rooms)}>Rooms</div>
         <div onClick={() => navigator(Paths.NewRoom)}>New Room</div>
         <div onClick={() => navigator(Paths.NewGuest)}>New Guest</div>
+        <div onClick={() => navigator(Paths.NewReservation)}>New Reservation</div>
       </div>
     </div>
   );

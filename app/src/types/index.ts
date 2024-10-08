@@ -38,3 +38,18 @@ export interface NewGuestFormData {
   Email: string;
   Phone: string;
 }
+
+export interface Guest {
+  id: number;
+  FullName: string;
+  BirthDate: string;
+  Email: string;
+  Phone: string;
+}
+
+export interface ReservationFormData {
+  GuestId: number;
+  RoomId: number;
+  StartDate: string;
+  EndDate: string;
+}

@@ -7,4 +7,5 @@ export let Paths = {
   Rooms: "/rooms",
   NewRoom: "/rooms/new",
   NewGuest: "/guests/new",
+  NewReservation: "/reservation/new",
 };

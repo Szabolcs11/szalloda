@@ -18,7 +18,7 @@ router.post("/", async (req: Request, res: any) => {
   const reservation = await addReservation(guestId, roomId, startDate, endDate, price);
   if (!reservation) return res.status(200).send({ success: false, message: "Unexpected error!" });
 
-  return res.status(200).send({ success: true, reservation });
+  return res.status(200).send({ success: true, reservation, message: "Successfully added reservation!" });
 });
 
 export default router;
