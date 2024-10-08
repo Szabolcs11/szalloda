@@ -8,4 +8,5 @@ export const ENDPOINTS = {
   ADD_ROOM: "/room/add",
   DELETE_ROOM: "/room/delete",
   ROOM_TYPES: "/roomtype/",
+  ADD_GUEST: "/guest/add",
 };

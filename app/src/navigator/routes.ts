@@ -6,4 +6,5 @@ export let Paths = {
   Search: "/search",
   Rooms: "/rooms",
   NewRoom: "/rooms/new",
+  NewGuest: "/guests/new",
 };

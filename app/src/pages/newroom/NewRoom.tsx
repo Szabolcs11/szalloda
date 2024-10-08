@@ -1,13 +1,12 @@
-import axios from "axios";
-import { ENDPOINTS } from "../../constans";
-import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { newRoomSchema } from "./schemas";
-import { NewRoomFormData } from "../../types";
-import RoomTypesSelect from "./components/RoomTypesSelect";
-import Select, { SingleValue } from "react-select";
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import Select, { SingleValue } from "react-select";
+import { ENDPOINTS } from "../../constans";
 import { showToast } from "../../toast";
+import { NewRoomFormData } from "../../types";
+import { newRoomSchema } from "./schemas";
 
 function NewRoom() {
   const {

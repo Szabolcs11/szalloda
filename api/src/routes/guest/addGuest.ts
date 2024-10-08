@@ -7,7 +7,7 @@ router.post("/", async (req: Request, res: any) => {
   if (!FullName || !Email || !Phone || !BirthDate)
     return res.status(200).send({ success: false, message: "Fill the fields!" });
   const guestId = await createGuest(FullName, Email, BirthDate, Phone);
-  return res.status(200).send({ success: true, guestId });
+  return res.status(200).send({ success: true, guestId, message: "Successfully added Gust" });
 });
 
 export default router;

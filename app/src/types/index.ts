@@ -31,3 +31,10 @@ export interface NewRoomFormData {
   roomNumber: string;
   roomType: number;
 }
+
+export interface NewGuestFormData {
+  Name: string;
+  Date: string;
+  Email: string;
+  Phone: string;
+}
