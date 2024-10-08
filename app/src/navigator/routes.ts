@@ -5,6 +5,7 @@ export let Paths = {
   Home: "/",
   Search: "/search",
   Rooms: "/rooms",
+  Room: "/room/:id",
   NewRoom: "/rooms/new",
   NewGuest: "/guests/new",
   NewReservation: "/reservation/new",

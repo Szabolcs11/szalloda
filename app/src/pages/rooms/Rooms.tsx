@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ENDPOINTS } from "../../constans";
 import { Room } from "../../types";
+import { navigator } from "../../navigator";
 
 function Rooms() {
   document.title = "Rooms";
@@ -20,7 +21,7 @@ function Rooms() {
       <h1 className="title">Rooms</h1>
       <div className="rooms">
         {rooms.map((room) => (
-          <div key={room.RoomId} className="room">
+          <div key={room.RoomId} className="room" onClick={() => navigator(`/room/${room.RoomId}`)}>
             <p>{"Szobaszám: " + room.RoomNumber}</p>
             <p>{"Szobatípus: " + room.Name}</p>
             <p>{room.NumberOfBeds + " Ágyas"}</p>

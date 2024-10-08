@@ -58,3 +58,44 @@
 .actionBtn {
     /* margin: 12px 0; */
 }
+
+/* Room */
+
+.roomoperations {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.roomoperations-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.operation-btn {
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    color: #ff0000;
+}
+
+.modifyBtn {
+    color: #0000ff;
+}
+
+.reservationBtn {
+    color: #00ff00;
+}
