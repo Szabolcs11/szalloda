@@ -13,10 +13,10 @@ router.post("/", async (req: Request, res: any) => {
   const room = await getRoomById(roomId);
   if (!room) return res.status(200).send({ success: false, message: "No room found with that id!" });
 
-  //TODO:Check if room available
-
   const reservation = await addReservation(guestId, roomId, startDate, endDate, price);
   if (!reservation) return res.status(200).send({ success: false, message: "Unexpected error!" });
+  if (reservation == "Already_Reserved")
+    return res.status(200).send({ success: false, message: "Room is already reserved for that date!" });
 
   return res.status(200).send({ success: true, reservation, message: "Successfully added reservation!" });
 });

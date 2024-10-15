@@ -212,10 +212,26 @@ export async function addReservation(
     EndDate: endDate,
     Price: price,
   };
-  const [rows] = await contprom.query("INSERT INTO reservations SET ?", [info]);
-  const res = rows as any;
-  if (!res.insertId) return false;
-  return res.insertId;
+
+  const [rows] = await contprom.query(
+    "SELECT * FROM reservations WHERE RoomId=? AND ((StartDate <= ? AND EndDate >= ?) OR (StartDate <= ? AND EndDate >= ?) OR (StartDate >= ? AND EndDate <= ?))",
+    [roomId, startDate, startDate, endDate, endDate, startDate, endDate]
+  );
+  const res = rows as any[];
+  if (res.length != 0) return "Already_Reserved";
+
+  const [rows2] = await contprom.query("SELECT * FROM rooms WHERE id=?", [roomId]);
+  const res2 = rows2 as any[];
+  if (res2.length == 0) return false;
+
+  const [rows3] = await contprom.query("SELECT * FROM guests WHERE id=?", [guestId]);
+  const res3 = rows3 as any[];
+  if (res3.length == 0) return false;
+
+  const [rows4] = await contprom.query("INSERT INTO reservations SET ?", [info]);
+  const res4 = rows4 as any;
+  if (!res4.insertId) return false;
+  return res4.insertId;
 }
 
 export async function getReservationById(reservationId: number) {
@@ -257,9 +273,24 @@ export async function editReservation(
   price: number
 ) {
   const [rows] = await contprom.query(
+    "SELECT * FROM reservations WHERE RoomId=? AND ((StartDate <= ? AND EndDate >= ?) OR (StartDate <= ? AND EndDate >= ?) OR (StartDate >= ? AND EndDate <= ?))",
+    [roomId, startDate, startDate, endDate, endDate, startDate, endDate]
+  );
+  const res = rows as any[];
+  if (res.length != 0) return "Already_Reserved";
+
+  const [rows2] = await contprom.query("SELECT * FROM rooms WHERE id=?", [roomId]);
+  const res2 = rows2 as any[];
+  if (res2.length == 0) return false;
+
+  const [rows3] = await contprom.query("SELECT * FROM guests WHERE id=?", [guestId]);
+  const res3 = rows3 as any[];
+  if (res3.length == 0) return false;
+
+  const [rows4] = await contprom.query(
     "UPDATE reservations SET GuestId=?, RoomId=?, StartDate=?, EndDate=?, Price=? WHERE id=?",
     [guestId, roomId, startDate, endDate, price, reservationId]
   );
-  if (!rows) return false;
+  if (!rows4) return false;
   return true;
 }
