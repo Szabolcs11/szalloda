@@ -14,6 +14,7 @@ import NewReservation from "../pages/newreservation/NewReservation";
 import Room from "../pages/room/RoomPage";
 import Guests from "../pages/guests/Guests";
 import Guest from "../pages/guest/Guest";
+import Reservations from "../pages/reservations/Reservations";
 
 export let navigator: any;
 export let loginUser: (user: any) => void;
@@ -62,6 +63,7 @@ function Index() {
             <Route path={Paths.NewReservation} element={<NewReservation />} />
             <Route path={Paths.Guests} element={<Guests />} />
             <Route path={Paths.Guest} element={<Guest />} />
+            <Route path={Paths.Reservations} element={<Reservations />} />
           </Route>
         </>
       )}

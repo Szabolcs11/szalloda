@@ -15,4 +15,11 @@ export const ENDPOINTS = {
   DELETE_GUEST: "/guest/delete",
   ADD_GUEST: "/guest/add",
   ADD_RESERVATION: "/reservation/add",
+  RESERVATIONS: "/reservation",
+};
+
+export const formatDateString = (date: string) => {
+  const d = new Date(date);
+  const fix = (n: number) => (n < 10 ? "0" + n : n);
+  return `${d.getFullYear()}.${fix(d.getMonth() + 1)}.${fix(d.getDate())}.`;
 };

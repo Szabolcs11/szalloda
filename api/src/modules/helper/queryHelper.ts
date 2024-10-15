@@ -239,3 +239,11 @@ export async function getUserBySessionToken(token: string) {
   if (res.length == 0) return false;
   return res[0].UserId;
 }
+
+export async function getReservations() {
+  const [rows] = await contprom.query(
+    "SELECT reservations.id as ReservationId, reservations.GuestId, reservations.RoomId, reservations.StartDate, reservations.EndDate, reservations.Price, guests.FullName as GuestName, rooms.RoomNumber, room_type.Name as RoomTypeName, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM reservations INNER JOIN guests ON reservations.GuestId = guests.id INNER JOIN rooms ON reservations.RoomId = rooms.id INNER JOIN room_type ON rooms.RoomType = room_type.id;"
+  );
+  const res = rows as any[];
+  return res;
+}

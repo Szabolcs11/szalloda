@@ -53,3 +53,18 @@ export interface ReservationFormData {
   StartDate: string;
   EndDate: string;
 }
+
+export interface Reservations {
+  ReservationId: number;
+  GuestId: number;
+  RoomId: number;
+  StartDate: string;
+  EndDate: string;
+  Price: number;
+  GuestName: string;
+  RoomNumber: number;
+  RoomTypeName: string;
+  NumberOfBeds: number;
+  Description: string;
+  DailyPrice: number;
+}
