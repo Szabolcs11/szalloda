@@ -12,6 +12,8 @@ import SiteLayout from "../components/SiteLayout";
 import NewGuest from "../pages/newguest/NewGuest";
 import NewReservation from "../pages/newreservation/NewReservation";
 import Room from "../pages/room/RoomPage";
+import Guests from "../pages/guests/Guests";
+import Guest from "../pages/guest/Guest";
 
 export let navigator: any;
 export let loginUser: (user: any) => void;
@@ -58,6 +60,8 @@ function Index() {
             <Route path={Paths.NewRoom} element={<NewRoom />} />
             <Route path={Paths.NewGuest} element={<NewGuest />} />
             <Route path={Paths.NewReservation} element={<NewReservation />} />
+            <Route path={Paths.Guests} element={<Guests />} />
+            <Route path={Paths.Guest} element={<Guest />} />
           </Route>
         </>
       )}

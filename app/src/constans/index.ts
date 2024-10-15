@@ -11,6 +11,8 @@ export const ENDPOINTS = {
   EDIT_ROOM: "/room/edit",
   ROOM_TYPES: "/roomtype/",
   GUESTS: "/guest",
+  GUEST: "/guest/",
+  DELETE_GUEST: "/guest/delete",
   ADD_GUEST: "/guest/add",
   ADD_RESERVATION: "/reservation/add",
 };
