@@ -2,7 +2,7 @@ import { Request, Router } from "express";
 import { getReservationById } from "../../modules/helper/queryHelper";
 const router = Router({ mergeParams: true });
 
-router.post("/", async (req: Request, res: any) => {
+router.get("/", async (req: Request, res: any) => {
   const { id } = req.params;
   if (!id) return res.status(200).send({ success: false, message: "Fill the fields!" });
 

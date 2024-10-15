@@ -220,7 +220,7 @@ export async function addReservation(
 
 export async function getReservationById(reservationId: number) {
   const [rows] = await contprom.query(
-    "SELECT reservations.id as ReservationId, reservations.GuestId, reservations.RoomId, reservations.StartDate, reservations.EndDate, reservations.Price, guests.FullName as GuestName, rooms.RoomNumber, room_type.Name as RoomTypeName, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM reservations INNER JOIN guests ON reservations.GuestId = guests.id INNER JOIN rooms ON reservations.RoomId = rooms.id INNER JOIN room_type ON rooms.RoomType = room_type.id WHERE reservations.id = ?;",
+    "SELECT reservations.id as ReservationId, reservations.GuestId, reservations.RoomId, reservations.StartDate, reservations.EndDate, reservations.Price, guests.FullName as GuestName, rooms.RoomNumber, room_type.id as RoomTypeId, room_type.Name as RoomTypeName, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM reservations INNER JOIN guests ON reservations.GuestId = guests.id INNER JOIN rooms ON reservations.RoomId = rooms.id INNER JOIN room_type ON rooms.RoomType = room_type.id WHERE reservations.id = ?;",
     [reservationId]
   );
   const res = rows as any[];
@@ -246,4 +246,20 @@ export async function getReservations() {
   );
   const res = rows as any[];
   return res;
+}
+
+export async function editReservation(
+  reservationId: number,
+  guestId: number,
+  roomId: number,
+  startDate: string,
+  endDate: string,
+  price: number
+) {
+  const [rows] = await contprom.query(
+    "UPDATE reservations SET GuestId=?, RoomId=?, StartDate=?, EndDate=?, Price=? WHERE id=?",
+    [guestId, roomId, startDate, endDate, price, reservationId]
+  );
+  if (!rows) return false;
+  return true;
 }

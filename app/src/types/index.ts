@@ -54,7 +54,7 @@ export interface ReservationFormData {
   EndDate: string;
 }
 
-export interface Reservations {
+export interface Reservation {
   ReservationId: number;
   GuestId: number;
   RoomId: number;
@@ -63,6 +63,7 @@ export interface Reservations {
   Price: number;
   GuestName: string;
   RoomNumber: number;
+  RoomTypeId?: number;
   RoomTypeName: string;
   NumberOfBeds: number;
   Description: string;
