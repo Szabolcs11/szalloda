@@ -63,6 +63,11 @@ export async function getGuestById(id: number) {
   const [rows] = await contprom.query("SELECT * FROM guests WHERE id=? AND Deleted=0", [id]);
   const res = rows as any[];
   if (res.length == 0) return false;
+  const [reservations] = await contprom.query(
+    "SELECT reservations.id as ReservationId, reservations.RoomId, reservations.StartDate, reservations.EndDate, reservations.Price, rooms.RoomNumber, room_type.Name as RoomTypeName, room_type.NumberOfBeds, room_type.Description, room_type.DailyPrice FROM reservations INNER JOIN rooms ON rooms.id = reservations.RoomID INNER JOIN room_type ON room_type.id = rooms.RoomType WHERE reservations.GuestID = ?;",
+    [id]
+  );
+  res[0].Reservations = reservations;
   return res[0];
 }
 

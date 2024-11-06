@@ -45,6 +45,7 @@ export interface Guest {
   BirthDate: string;
   Email: string;
   Phone: string;
+  Reservations: Reservation[];
 }
 
 export interface ReservationFormData {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ENDPOINTS } from "../../constans";
+import { ENDPOINTS, formatDateString } from "../../constans";
 import Loader from "../../components/Loader";
 import { Guest as GuestType } from "../../types";
 import { showToast } from "../../toast";
@@ -59,6 +59,23 @@ function Guest() {
           >
             Törlés
           </button>
+        </div>
+      </div>
+      <div className="reservations">
+        <h1 className="title">Foglalások</h1>
+        <div className="rooms">
+          {guest?.Reservations.map((reservation) => (
+            <div key={reservation.RoomId} className="room" onClick={() => navigator(`/room/${reservation.RoomId}`)}>
+              <p>
+                {"Foglalva: " + formatDateString(reservation.StartDate) + " - " + formatDateString(reservation.EndDate)}
+              </p>
+              <p>{"Szobaszám: " + reservation.RoomNumber}</p>
+              <p>{"Szobatípus: " + reservation.RoomTypeName}</p>
+              <p>{reservation.NumberOfBeds + " Ágyas"}</p>
+              <p>{reservation.Description}</p>
+              <p>{reservation.DailyPrice + " € /  Éjszaka"}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
