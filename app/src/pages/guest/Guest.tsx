@@ -65,15 +65,15 @@ function Guest() {
         <h1 className="title">Foglalások</h1>
         <div className="rooms">
           {guest?.Reservations.map((reservation) => (
-            <div key={reservation.RoomId} className="room" onClick={() => navigator(`/room/${reservation.RoomId}`)}>
-              <p>
-                {"Foglalva: " + formatDateString(reservation.StartDate) + " - " + formatDateString(reservation.EndDate)}
-              </p>
-              <p>{"Szobaszám: " + reservation.RoomNumber}</p>
-              <p>{"Szobatípus: " + reservation.RoomTypeName}</p>
-              <p>{reservation.NumberOfBeds + " Ágyas"}</p>
-              <p>{reservation.Description}</p>
-              <p>{reservation.DailyPrice + " € /  Éjszaka"}</p>
+            <div
+              key={reservation.RoomId}
+              className="room"
+              onClick={() => navigator(`/reservation/${reservation.ReservationId}`)}
+            >
+              <p style={{ fontSize: 18, fontWeight: "500" }}>{reservation.RoomNumber}</p>
+              <p>{"Szoba típus: " + reservation.RoomTypeName}</p>
+              <p style={{ fontSize: 18, fontWeight: "500" }}>{guest.FullName}</p>
+              <p>{formatDateString(reservation.StartDate) + " - " + formatDateString(reservation.EndDate)}</p>
             </div>
           ))}
         </div>
