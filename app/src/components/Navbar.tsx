@@ -5,13 +5,28 @@ function Navbar() {
   return (
     <div>
       <div className="navbarroutes">
-        <div onClick={() => navigator(Paths.Home)}>Home</div>
-        <div onClick={() => navigator(Paths.Rooms)}>Rooms</div>
-        <div onClick={() => navigator(Paths.NewRoom)}>New Room</div>
-        <div onClick={() => navigator(Paths.Guests)}>Guests</div>
-        <div onClick={() => navigator(Paths.NewGuest)}>New Guest</div>
-        <div onClick={() => navigator(Paths.NewReservation)}>New Reservation</div>
-        <div onClick={() => navigator(Paths.Reservations)}>Reservations</div>
+        <div onClick={() => navigator(Paths.Home)}>Főoldal</div>
+        <div className="dropdown">
+          <button className="dropbtn">Szobák</button>
+          <div className="dropdown-content">
+            <div onClick={() => navigator(Paths.Rooms)}>Szobák</div>
+            <div onClick={() => navigator(Paths.NewRoom)}>Új szoba</div>
+          </div>
+        </div>
+        <div className="dropdown">
+          <button className="dropbtn">Vendégek</button>
+          <div className="dropdown-content">
+            <div onClick={() => navigator(Paths.Guests)}>Vendégek</div>
+            <div onClick={() => navigator(Paths.NewGuest)}>Új Vendégek</div>
+          </div>
+        </div>
+        <div className="dropdown">
+          <button className="dropbtn">Foglalások</button>
+          <div className="dropdown-content">
+            <div onClick={() => navigator(Paths.Reservations)}>Foglalások</div>
+            <div onClick={() => navigator(Paths.NewReservation)}>Új Foglalások</div>
+          </div>
+        </div>
       </div>
     </div>
   );
