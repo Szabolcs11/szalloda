@@ -1,15 +1,15 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import Select, { SingleValue } from "react-select";
 import { ENDPOINTS } from "../../constans";
-import { NewRoomFormData, Room } from "../../types";
-import { showToast } from "../../toast";
 import { navigator } from "../../navigator";
 import { Paths } from "../../navigator/routes";
-import { Controller, set, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { showToast } from "../../toast";
+import { NewRoomFormData, Room } from "../../types";
 import { newRoomSchema } from "../newroom/schemas";
-import Select, { SingleValue } from "react-select";
 
 function RoomPage() {
   const { id } = useParams();
@@ -120,7 +120,8 @@ function RoomPage() {
                 <Controller
                   name="roomType"
                   control={control}
-                  defaultValue={currentRoom.RoomTypeId}
+                  //@ts-ignore
+                  defaultValue={currentRoom?.RoomTypeId}
                   render={({ field: { onChange, value } }) => (
                     <Select
                       styles={customStyles}

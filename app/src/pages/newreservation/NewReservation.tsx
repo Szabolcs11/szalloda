@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { ENDPOINTS } from "../../constans";
-import axios from "axios";
-import { Guest, ReservationFormData, Room } from "../../types";
-import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { NewReservationSchema } from "./schemas";
-import Select from "react-select";
-import { SingleValue } from "react-select";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import Select, { SingleValue } from "react-select";
+import { ENDPOINTS } from "../../constans";
 import { showToast } from "../../toast";
+import { Guest, ReservationFormData, Room } from "../../types";
+import { NewReservationSchema } from "./schemas";
 
 function NewReservation() {
   const [rooms, setRooms] = useState<Room[]>([]);
@@ -99,6 +98,7 @@ function NewReservation() {
               render={({ field: { onChange, value } }) => (
                 <Select
                   styles={customStyles}
+                  //@ts-ignore
                   defaultValue={{ label: "Válasz vendéget", value: "0" }}
                   value={selectguests.find((c) => c.value === value)}
                   onChange={(val: SingleValue<{ value: number; label: string }>) => {
@@ -122,6 +122,7 @@ function NewReservation() {
               render={({ field: { onChange, value } }) => (
                 <Select
                   styles={customStyles}
+                  //@ts-ignore
                   defaultValue={{ label: "Válasz szoba típust", value: "0" }}
                   value={selectrooms.find((c) => c.value === value)}
                   onChange={(val: SingleValue<{ value: number; label: string }>) => {
