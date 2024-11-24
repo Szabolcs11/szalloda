@@ -17,6 +17,18 @@ export interface Stats {
   rooms: number;
   reservations: number;
   roomtypeStats: RoomTypeStat[];
+  guestReservationStats: GuestReservationStat[];
+  guestsSpentMoney: GuestSpentMoney[];
+}
+
+export interface GuestSpentMoney {
+  FullName: string;
+  TotalPaid: number;
+}
+
+export interface GuestReservationStat {
+  FullName: string;
+  ReservationCount: number;
 }
 
 export interface RoomTypeStat {

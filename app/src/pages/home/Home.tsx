@@ -39,6 +39,34 @@ function Home() {
       <div style={{ marginTop: 24 }}>
         <table>
           <tr>
+            <td>Vendég neve</td>
+            <td>Foglalásokkor elköltött pénz</td>
+          </tr>
+          {stats?.guestsSpentMoney.map((user) => (
+            <tr key={user.FullName}>
+              <td>{user.FullName}</td>
+              <td>{user.TotalPaid}</td>
+            </tr>
+          ))}
+        </table>
+      </div>
+      <div style={{ marginTop: 24 }}>
+        <table>
+          <tr>
+            <td>Vendég neve</td>
+            <td>Foglalások száma</td>
+          </tr>
+          {stats?.guestReservationStats.map((user) => (
+            <tr key={user.FullName}>
+              <td>{user.FullName}</td>
+              <td>{user.ReservationCount}</td>
+            </tr>
+          ))}
+        </table>
+      </div>
+      <div style={{ marginTop: 24 }}>
+        <table>
+          <tr>
             <td>Szoba típus</td>
             <td>Foglalások száma</td>
             <td>Átlagár</td>

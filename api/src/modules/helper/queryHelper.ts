@@ -36,7 +36,7 @@ export async function checkSession(token: number) {
 
 export async function getUserById(userId: number) {
   const [rows] = await contprom.query(
-    "SELECT users.id, users.Username, users.FullName, ranks.Name as RankName, ranks.Permission, users.CreatedAt FROM users INNER JOIN ranks ON users.Rank = ranks.id WHERE users.id=?",
+    "SELECT users.id, users.Username, users.FullName, ranks.Name AS RankName, ranks.Permission, users.CreatedAt FROM users INNER JOIN user_ranks ON users.id = user_ranks.userid INNER JOIN ranks ON user_ranks.rankid = ranks.id WHERE users.id = ?;",
     [userId]
   );
   const res = rows as any[];
@@ -62,11 +62,23 @@ export async function getStats() {
   );
   const roomtypeStats = roomtypeStatsRows as any[];
 
+  const [guestReservationStatsRows] = await contprom.query(
+    "SELECT g.FullName, COUNT(r.id) AS ReservationCount FROM guests g JOIN reservations r ON g.id = r.GuestID GROUP BY g.id;"
+  );
+  const guestReservationStats = guestReservationStatsRows as any[];
+
+  const [guestsSpentMoneyRows] = await contprom.query(
+    "SELECT g.FullName, SUM(res.Price) AS TotalPaid FROM guests g JOIN reservations res ON g.id = res.GuestID WHERE g.Deleted = 0 GROUP BY g.id, g.FullName ORDER BY TotalPaid DESC;"
+  );
+  const guestsSpentMoney = guestsSpentMoneyRows as any[];
+
   return {
     guests: guestCount,
     rooms: roomCount,
     reservations: reservationCount,
     roomtypeStats,
+    guestReservationStats,
+    guestsSpentMoney,
   };
 }
 
