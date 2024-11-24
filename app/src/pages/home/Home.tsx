@@ -36,6 +36,22 @@ function Home() {
         <p>Összes szoba: {stats?.rooms}</p>
         <p>Összes foglalás: {stats?.reservations}</p>
       </div>
+      <div style={{ marginTop: 24 }}>
+        <table>
+          <tr>
+            <td>Szoba típus</td>
+            <td>Foglalások száma</td>
+            <td>Átlagár</td>
+          </tr>
+          {stats?.roomtypeStats.map((roomtype) => (
+            <tr key={roomtype.RoomType}>
+              <td>{roomtype.RoomType}</td>
+              <td>{roomtype.ReservationCount}</td>
+              <td>{roomtype.AveragePrice}</td>
+            </tr>
+          ))}
+        </table>
+      </div>
     </div>
   );
 }

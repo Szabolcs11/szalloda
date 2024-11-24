@@ -45,17 +45,28 @@ export async function getUserById(userId: number) {
 }
 
 export async function getStats() {
-  const [guestRows] = await contprom.query("SELECT COUNT(*) as count FROM guests");
-  const guests = guestRows as any[];
-  const [roomRoows] = await contprom.query("SELECT COUNT(*) as count FROM rooms");
-  const rooms = roomRoows as any[];
-  const [reservationRoows] = await contprom.query("SELECT COUNT(*) as count FROM reservations");
-  const reservations = reservationRoows as any[];
+  const [rows] = await contprom.query(`
+    SELECT 
+      (SELECT COUNT(*) FROM guests) AS guestCount,
+      (SELECT COUNT(*) FROM rooms) AS roomCount,
+      (SELECT COUNT(*) FROM reservations) AS reservationCount
+  `);
+
+  const res = rows as any[];
+  const guestCount = res[0].guestCount;
+  const roomCount = res[0].roomCount;
+  const reservationCount = res[0].reservationCount;
+
+  const [roomtypeStatsRows] = await contprom.query(
+    "SELECT rt.Name AS RoomType, COUNT(r.id) AS ReservationCount, AVG(r.Price) AS AveragePrice FROM reservations r JOIN rooms rm ON r.RoomID = rm.id JOIN room_type rt ON rm.RoomType = rt.id GROUP BY rt.Name;"
+  );
+  const roomtypeStats = roomtypeStatsRows as any[];
 
   return {
-    guests: guests[0].count,
-    rooms: rooms[0].count,
-    reservations: reservations[0].count,
+    guests: guestCount,
+    rooms: roomCount,
+    reservations: reservationCount,
+    roomtypeStats,
   };
 }
 

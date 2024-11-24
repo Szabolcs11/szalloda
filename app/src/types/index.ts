@@ -16,6 +16,13 @@ export interface Stats {
   guests: number;
   rooms: number;
   reservations: number;
+  roomtypeStats: RoomTypeStat[];
+}
+
+export interface RoomTypeStat {
+  RoomType: string;
+  ReservationCount: number;
+  AveragePrice: string;
 }
 
 export interface Room {
