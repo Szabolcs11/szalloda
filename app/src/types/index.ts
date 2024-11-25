@@ -19,6 +19,7 @@ export interface Stats {
   roomtypeStats: RoomTypeStat[];
   guestReservationStats: GuestReservationStat[];
   guestsSpentMoney: GuestSpentMoney[];
+  guestsPayMoreThanAvg: Guest[];
 }
 
 export interface GuestSpentMoney {

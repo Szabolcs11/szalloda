@@ -72,6 +72,11 @@ export async function getStats() {
   );
   const guestsSpentMoney = guestsSpentMoneyRows as any[];
 
+  const [guestPayMoreThanAvgRows] = await contprom.query(
+    "SELECT g.FullName, g.Email FROM guests g WHERE g.id IN ( SELECT res.GuestID FROM reservations res JOIN rooms r ON res.RoomID = r.id JOIN room_type rt ON r.RoomType = rt.id WHERE rt.DailyPrice > ( SELECT AVG(DailyPrice) FROM room_type ) );"
+  );
+  const guestsPayMoreThanAvg = guestPayMoreThanAvgRows as any[];
+
   return {
     guests: guestCount,
     rooms: roomCount,
@@ -79,6 +84,7 @@ export async function getStats() {
     roomtypeStats,
     guestReservationStats,
     guestsSpentMoney,
+    guestsPayMoreThanAvg,
   };
 }
 

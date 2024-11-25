@@ -80,6 +80,23 @@ function Home() {
           ))}
         </table>
       </div>
+      <div style={{ marginTop: 24 }}>
+        <h1 style={{ fontWeight: "600", fontSize: 16 }}>
+          Vendégek, akik foglaltak egy szobát, melynek napiára drágább mint az átlag
+        </h1>
+        <table>
+          <tr>
+            <td>Teljes név</td>
+            <td>Email</td>
+          </tr>
+          {stats?.guestsPayMoreThanAvg.map((guests) => (
+            <tr key={guests.FullName}>
+              <td>{guests.FullName}</td>
+              <td>{guests.Email}</td>
+            </tr>
+          ))}
+        </table>
+      </div>
     </div>
   );
 }
